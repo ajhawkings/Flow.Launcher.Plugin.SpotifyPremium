@@ -66,6 +66,16 @@ namespace Flow.Launcher.Plugin.SpotifyPremium
             _terms.Add("volume", SetVolume);
             _terms.Add("shuffle", ToggleShuffle);
 
+            // aliases
+            _terms.Add("ar", SearchArtist);
+            _terms.Add("al", SearchAlbum);
+            _terms.Add("t", SearchTrack);
+            _terms.Add("p", SearchPlaylist);
+            _terms.Add("d", GetDevices);
+            _terms.Add("q", QueueSearch);
+            _terms.Add("m", ToggleMute);
+            _terms.Add("v", SetVolume);
+
             //view query count and average query duration
             _terms.Add("diag", q =>
                 SingleResultInList(
