@@ -394,6 +394,19 @@ namespace Flow.Launcher.Plugin.SpotifyPremium
 
             var returnResults = new List<SpotifySearchResult>();
 
+            if (searchResponse.Tracks.Items?.Count > 0)
+            {
+                returnResults.AddRange(searchResponse.Tracks.Items.Select(x => new SpotifySearchResult()
+                {
+                    Title = $"Track  :  {x.Name}",
+                    Subtitle = $"Album: {x.Album.Name}, by: " + string.Join(", ", x.Artists.Select(a => a.Name)),
+                    Id = x.Id,
+                    Name = x.Name,
+                    Uri = x.Uri,
+                    Images = x.Album.Images
+                }));
+            }
+
             if (searchResponse.Albums.Items?.Count > 0)
             {
                 returnResults.AddRange(searchResponse.Albums.Items.Select(x => new SpotifySearchResult()
@@ -417,19 +430,6 @@ namespace Flow.Launcher.Plugin.SpotifyPremium
                     Name = x.Name,
                     Uri = x.Uri,
                     Images = x.Images
-                }));
-            }
-
-            if (searchResponse.Tracks.Items?.Count > 0)
-            {
-                returnResults.AddRange(searchResponse.Tracks.Items.Select(x => new SpotifySearchResult()
-                {
-                    Title = $"Track  :  {x.Name}",
-                    Subtitle = $"Album: {x.Album.Name}, by: " + string.Join(", ", x.Artists.Select(a => a.Name)),
-                    Id = x.Id,
-                    Name = x.Name,
-                    Uri = x.Uri,
-                    Images = x.Album.Images
                 }));
             }
 
